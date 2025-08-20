@@ -890,7 +890,7 @@ async function saveData() {
     // --- MODIFIKASI SELESAI ---
 dataToSend.appType = "stockfit";
     try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbz6MSvAqN2vhsasQ-fK_2hxgOkeue3zlc5TsfyLISX8VydruDi5CdTsDgmyPXozv3SB/exec", {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbwp9jX0u4u6qKtP3HoBKg2-Bi0Hcn0vCBh4p3TnFhjIsg4-bUp3F6dlM2GGIMUPop8X/exec", {
             method: "POST",
             body: JSON.stringify(dataToSend),
         });
@@ -1483,3 +1483,4 @@ Apabila terdapat kendala teknis, silakan hubungi nomor berikut: 088972745194.`
         }
     }
 });
+
