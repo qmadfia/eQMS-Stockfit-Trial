@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspection Form</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1>E-QMS STOCKFIT</h1>
+<button id="announcement-button" class="announcement-button">
+    <i class="fas fa-bell announcement-icon"></i>
+</button>
+  <!-- Tombol Statistik -->
+<button class="statistic-button" title="Lihat Statistik Data">
+  <i class="statistic-icon">📊</i>
+</button>
+    </div>
+    <div class="dashboard">
+        </div>
+
+   <div id="announcement-popup" class="announcement-popup">
+    <div class="announcement-content">
+        <span class="close-button">&times;</span>
+        <div id="announcement-date" class="announcement-date">
+            <button id="prev-announcement" class="announcement-nav">&lt;</button>
+            <span id="date-text"></span>
+            <button id="next-announcement" class="announcement-nav">&gt;</button>
+        </div>
+        <div id="announcement-text" class="announcement-text"></div>
+    </div>
+</div>
+    <div class="dashboard">
+        <!-- Form Section (Kiri Bawah) -->
+        <div class="form-section">
+    <label for="qty-sample-set">Qty Sample Set</label>
+    <input type="number" id="qty-sample-set" placeholder="Masukkan jumlah sampel" value="0">
+
+            <label for="auditor">Auditor</label>
+            <select id="auditor">
+                <option value="">Select</option>
+                <option value="Amalia Nur Aisyah">Amalia Nur Aisyah</option>
+                <option value="Siti Patimah">Siti Patimah</option>
+            </select>
+
+            <label for="ncvs">Line</label>
+            <select id="ncvs">
+                 <option value="Line 1">Line 1</option>
+                <option value="Line 2">Line 2</option>
+                <option value="Line 3">Line 3</option>
+                <option value="Line 4">Line 4</option>
+                <option value="Line 5">Line 5</option>
+                <option value="Line 6">Line 6</option>
+                <option value="Line 7">Line 7</option>
+                <option value="Line 8">Line 8</option>
+                <option value="Line 9">Line 9</option>
+                <option value="Line 10">Line 10</option>
+            </select>
+
+<label for="style-number">Style Number</label>
+<input type="text" id="style-number" placeholder="Style number diisi lengkap">
+
+<label for="model-name">Model Name</label>
+<input type="text" id="model-name" placeholder="Enter model name" readonly>
+
+            <!-- Wrapper for Save Button -->
+            <div class="button-wrapper">
+                <button class="save-button">SIMPAN</button>
+            </div>
+        </div>
+<!-- FTT & Qty Inspect Section -->
+<div class="ftt-container">
+    <!-- FTT Section -->
+    <div class="section">
+        <label for="ftt">
+            <span>📊 FTT</span>
+        </label>
+        <div id="fttOutput" class="counter">0%</div>
+    </div>
+<!-- Redo Rate Section -->
+    <div class="section">
+        <label for="redo-rate">
+            <span>🔄 Rework Rate</span>
+        </label>
+        <div id="redoRateOutput" class="counter">0%</div>
+    </div>
+    <!-- Qty Inspect Section -->
+    <div class="section">
+        <label for="qty-inspect">
+            <span>🔍 Qty Inspect</span>
+        </label>
+        <div id="qtyInspectOutput" class="counter">0</div>
+    </div>
+</div>
+
+<div class="qty-section">
+    <div class="qty-item">
+        <button class="input-button a-grade">A-Grade</button>
+        <div id="a-grade-counter" class="output-box">0</div>
+    </div>
+
+    <div class="qty-item">
+        <button class="input-button r-grade">Rework</button>
+        <div id="r-grade-counter" class="output-box">0</div>
+    </div>
+
+    <div class="qty-item">
+        <button class="input-button b-grade">B-Grade</button>
+        <div id="b-grade-counter" class="output-box">0</div>
+    </div>
+
+    <div class="qty-item">
+        <button class="input-button c-grade">C-Grade</button>
+        <div id="c-grade-counter" class="output-box">0</div>
+    </div>
+</div>
+
+
+
+        <!-- Summary Defect Section -->
+        <div class="summary-defect">
+            <h3>Summary Defect</h3>
+            <div id="summary-list">
+                <!-- Summary will be displayed here -->
+            </div>
+        </div>
+
+        <!-- Rework Section -->
+        <div class="rework-section">
+            <!-- Rework Left -->
+            <div class="rework-left">
+                <h3>Left</h3>
+                <button id="rework-left" class="rework-button">Click for left defect</button>
+                <p id="left-counter">0</p>
+            </div>
+                <div class="rework-pairs">
+        <h3>Pairs</h3>
+        <button id="rework-pairs" class="rework-button">Click for pairs defect</button>
+        <p id="pairs-counter">0</p>
+    </div>
+                <!-- Rework Right -->
+            <div class="rework-right">
+                <h3>Right</h3>
+                <button id="rework-right" class="rework-button">Click for right defect</button>
+                <p id="right-counter">0</p>
+            </div>
+        </div>
+
+        <!-- Defect Menu Section -->
+        <div class="defect-menu">
+    <h3>Defect Menu</h3>
+   <div class="defect-items">
+<!-- DEFECT BIRU (Atas) -->
+<button class="defect-button defect-blue" data-defect="POOR TRIMMING">POOR TRIMMING</button>
+<button class="defect-button defect-blue" data-defect="STAIN/CONTAMINATION">STAIN/CONTAMINATION</button>
+<button class="defect-button defect-blue" data-defect="OVER/POOR CEMENT">OVER/POOR CEMENT</button>
+<button class="defect-button defect-blue" data-defect="OVER/POOR PRIMER">OVER/POOR PRIMER</button>
+
+<!-- DEFECT KUNING (Tengah) -->
+<button class="defect-button defect-yellow" data-defect="POOR/OVER GRINDING/BUFFING">POOR/OVER GRINDING/BUFFING</button>
+<button class="defect-button defect-yellow" data-defect="POOR PAINTING">POOR PAINTING</button>
+<button class="defect-button defect-yellow" data-defect="YELLOWING">YELLOWING</button>
+<button class="defect-button defect-yellow" data-defect="TEXTURE INCONSISTENCY">TEXTURE INCONSISTENCY</button>
+<button class="defect-button defect-yellow" data-defect="COLOR DIFFERENCE">COLOR DIFFERENCE</button>
+<button class="defect-button defect-yellow" data-defect="COLOR BLEEDING">COLOR BLEEDING</button>
+<button class="defect-button defect-yellow" data-defect="DOUBLE SKIN">DOUBLE SKIN</button>
+<button class="defect-button defect-yellow" data-defect="UNFITTING">UNFITTING</button>
+<button class="defect-button defect-yellow" data-defect="SHRINKAGE">SHRINKAGE</button>
+<button class="defect-button defect-yellow" data-defect="OVER TRIMMING">OVER TRIMMING</button>
+<button class="defect-button defect-yellow" data-defect="AIR TRAP/BUBBLE">AIR TRAP/BUBBLE</button>
+<button class="defect-button defect-yellow" data-defect="UNDER CURE">UNDER CURE</button>
+
+<!-- DEFECT MERAH (Bawah) -->
+<button class="defect-button defect-red" data-defect="SOLELAYING">SOLELAYING</button>
+<button class="defect-button defect-red" data-defect="REBOUND">REBOUND</button>
+<button class="defect-button defect-red" data-defect="CRACK">CRACK</button>
+<button class="defect-button defect-red" data-defect="DAMAGE">DAMAGE</button>
+<button class="defect-button defect-red" data-defect="DELAMINATION">DELAMINATION</button>
+<button class="defect-button defect-red" data-defect="BOND GAP">BOND GAP</button>
+<button class="defect-button defect-red" data-defect="IP HOLE>2mm">IP HOLE>2mm</button>
+            </div>
+</div>
+<div id="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="script.js" type="module"></script>
+</body>
+</html>
