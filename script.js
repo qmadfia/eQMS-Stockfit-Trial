@@ -44,7 +44,6 @@ let rightCounter;
 let pairsCounter;
 let summaryContainer;
 let redoRateOutput;
-let qtySampleSetInput;
 let defectButtons;
 let reworkButtons;
 let gradeInputButtons;
@@ -54,8 +53,11 @@ let modelNameInput;
 let styleNumberInput;
 // Data mapping Auditor ke NCVS
 const auditorNcvsMap = {
-    "Amalia Nur Aisyah": ["Line 1", "Line 2", "Line 3", "Line 4", "Line 5", "Line 6", "Line 7", "Line 8", "Line 9", "Line 10"],
-    "Siti Patimah": ["Line 1", "Line 2", "Line 3", "Line 4", "Line 5", "Line 6", "Line 7", "Line 8", "Line 9", "Line 10"]
+    "Amalia Nur Aisyah - 4550424": ["Line 1", "Line 2", "Line 3", "Line 4", "Line 5", "Line 6", "Line 7", "Line 8", "Line 9", "Line 10"],
+    "Siti Patimah - 5120524": ["Line 1", "Line 2", "Line 3", "Line 4", "Line 5", "Line 6", "Line 7", "Line 8", "Line 9", "Line 10"],
+    "Inspector 3 - 313131": ["Line 1", "Line 2", "Line 3", "Line 4", "Line 5", "Line 6", "Line 7", "Line 8", "Line 9", "Line 10"],
+    "Inspector 4 - 414141": ["Line 1", "Line 2", "Line 3", "Line 4", "Line 5", "Line 6", "Line 7", "Line 8", "Line 9", "Line 10"],
+    "Inspector 5 - 515151": ["Line 1", "Line 2", "Line 3", "Line 4", "Line 5", "Line 6", "Line 7", "Line 8", "Line 9", "Line 10"]
 };
 
 // Kunci localStorage
@@ -66,10 +68,8 @@ const STORAGE_KEYS = {
     QTY_OUTPUTS: 'qms_qty_outputs',
     REWORK_COUNTERS: 'qms_rework_counters',
     STATE_VARIABLES: 'qms_state_variables',
-    QTY_SAMPLE_SET: 'qtySampleSet'
 };
 
-const MAX_INSPECTION_LIMIT = 24;
 
 // ===========================================
 // 2. Fungsi localStorage Komprehensif (Modifikasi)
@@ -157,12 +157,7 @@ function loadFromLocalStorage() {
             usedReworkPositionsThisCycle = stateData.usedReworkPositionsThisCycle || []; // Muat status rework yang digunakan
             // --- MODIFIKASI SELESAI ---
         }
-        
-        // Memuat Qty Sample Set
-        const savedQtySampleSet = localStorage.getItem(STORAGE_KEYS.QTY_SAMPLE_SET);
-        if (qtySampleSetInput && savedQtySampleSet) {
-             qtySampleSetInput.value = parseInt(savedQtySampleSet, 10) > 0 ? savedQtySampleSet : '';
-        }
+      
         
         // Update semua tampilan berdasarkan data yang dimuat
         updateAllDisplays();
@@ -216,18 +211,6 @@ function updateButtonStatesFromLoadedData() {
     updateQtySectionState();
 }
 
-function clearLocalStorageExceptQtySampleSet() {
-    try {
-        localStorage.removeItem(STORAGE_KEYS.FORM_DATA);
-        localStorage.removeItem(STORAGE_KEYS.DEFECT_COUNTS);
-        localStorage.removeItem(STORAGE_KEYS.QTY_OUTPUTS);
-        localStorage.removeItem(STORAGE_KEYS.REWORK_COUNTERS);
-        localStorage.removeItem(STORAGE_KEYS.STATE_VARIABLES);
-        console.log("localStorage dibersihkan (kecuali qty sample set)");
-    } catch (error) {
-        console.error("Error saat membersihkan localStorage:", error);
-    }
-}
 
 // ===========================================
 // 3. Fungsi Pembantu: Mengatur Status Tombol (Modifikasi)
@@ -329,12 +312,6 @@ function initButtonStates() {
     // --- MODIFIKASI SELESAI ---
     updateQtySectionState(); 
     
-    // Cek batas inspeksi
-    if (totalInspected >= MAX_INSPECTION_LIMIT) {
-        toggleButtonGroup(defectButtons, false);
-        toggleButtonGroup(gradeInputButtons, false); // Nonaktifkan semua grade termasuk A
-        console.log(`Batas inspeksi ${MAX_INSPECTION_LIMIT} tercapai. Input dinonaktifkan.`);
-    }
 }
 
 // ===========================================
@@ -473,25 +450,6 @@ function updateTotalQtyInspect() {
     updateFTT(); // Selalu panggil update FTT
     updateRedoRate(); // Selalu panggil update Redo Rate
     saveToLocalStorage(); // Simpan ke localStorage setiap ada perubahan
-
-    // --- LOGIKA BATAS INSPEKSI 50 YANG DIPERBAIKI ---
-    if (totalInspected >= MAX_INSPECTION_LIMIT) {
-        // Menonaktifkan SEMUA tombol input yang relevan secara PERMANEN
-        // (sampai aplikasi di-reset)
-        toggleButtonGroup(defectButtons, false);
-        toggleButtonGroup(reworkButtons, false);
-        toggleButtonGroup(gradeInputButtons, false);
-        console.log(`Batas inspeksi ${MAX_INSPECTION_LIMIT} telah tercapai. Input dinonaktifkan.`);
-        // Pastikan tidak ada tombol yang ter-highlight saat ini
-        defectButtons.forEach(btn => btn.classList.remove('active'));
-        reworkButtons.forEach(btn => btn.classList.remove('active'));
-        gradeInputButtons.forEach(btn => btn.classList.remove('active'));
-    } else {
-        // JANGAN panggil initButtonStates di sini, karena itu mereset state.
-        // initButtonStates akan dipanggil pada tempat yang tepat (setelah siklus input selesai).
-        // Biarkan alur handleDefectClick, handleReworkClick, handleGradeClick yang mengatur status tombol dinamis.
-    }
-    // --- AKHIR LOGIKA BATAS INSPEKSI 50 ---
 }
 
 // ===========================================
@@ -814,10 +772,6 @@ async function saveData() {
     const loadingOverlay = document.getElementById('loading-overlay');
     // --- MODIFIKASI SELESAI ---
 
-    if (!validateInputs() || !validateQtySampleSet()) {
-        console.log("Validasi dasar gagal. Penyimpanan dibatalkan.");
-        return;
-    }
 
     // Panggil fungsi pembantu untuk mendapatkan semua hitungan rework yang benar
     const processedReworks = getProcessedReworkCounts();
@@ -931,16 +885,16 @@ function validateInputs() {
 
     // Pastikan auditor dan ncvs sudah dipilih
     if (!auditor || auditor === "") {
-        alert("Harap isi semua form dasar (Auditor, NCVS, Model, Style Number) sebelum menyimpan data!");
+        alert("Harap isi semua form dasar (Inspector, NCVS, Model, Style Number) sebelum menyimpan data!");
         return false;
     }
     if (!ncvs || ncvs === "") {
-        alert("Harap isi semua form dasar (Auditor, NCVS, Model, Style Number) sebelum menyimpan data!");
+        alert("Harap isi semua form dasar (Inspector, NCVS, Model, Style Number) sebelum menyimpan data!");
         return false;
     }
 
     if (!modelName || !styleNumber) {
-        alert("Harap isi semua form dasar (Auditor, NCVS, Model, Style Number) sebelum menyimpan data!");
+        alert("Harap isi semua form dasar (Inspector, NCVS, Model, Style Number) sebelum menyimpan data!");
         return false;
     }
 
@@ -982,33 +936,6 @@ function validateDefects() {
     return true;
 }
 
-// ===========================================
-// 14. Validasi Qty Sample Set
-// ===========================================
-function validateQtySampleSet() {
-    if (!qtySampleSetInput) {
-        console.error("Elemen qty-sample-set tidak ditemukan!");
-        return false;
-    }
-
-    const qtySampleSetValue = parseInt(qtySampleSetInput.value, 10);
-
-    // Validasi jika Qty Sample Set kosong atau 0
-    if (isNaN(qtySampleSetValue) || qtySampleSetValue <= 0) {
-        alert("Harap masukkan Jumlah Qty Sample Set yang valid dan lebih dari 0.");
-        return false;
-    }
-
-    const currentTotalInspect = totalInspected;
-
-    // Qty Sample Set harus sama dengan Qty Inspect
-    if (currentTotalInspect !== qtySampleSetValue) {
-        alert(`Jumlah total Qty Inspect (${currentTotalInspect}) harus sama dengan Qty Sample Set (${qtySampleSetValue}).`);
-        return false;
-    }
-
-    return true;
-}
 
 // ===========================================
 // 15. Reset Semua Field Setelah Simpan (Modifikasi)
@@ -1058,8 +985,6 @@ function resetAllFields() {
     // Atur ulang status tombol ke kondisi awal
     initButtonStates(); 
     
-    // Hapus semua data dari localStorage kecuali qty sample
-    clearLocalStorageExceptQtySampleSet();
     
     console.log("Semua field dan data internal telah berhasil direset.");
 }
@@ -1116,7 +1041,6 @@ function initApp() {
     pairsCounter = document.getElementById('pairs-counter');
     summaryContainer = document.getElementById('summary-list');
     redoRateOutput = document.getElementById('redoRateOutput');
-    qtySampleSetInput = document.getElementById('qty-sample-set');
 
     defectButtons = document.querySelectorAll('.defect-button');
     reworkButtons = document.querySelectorAll('.rework-button');
@@ -1190,30 +1114,6 @@ function initApp() {
         saveButton.addEventListener("click", saveData);
     }
 
-    // Inisialisasi Qty Sample Set
-    if (qtySampleSetInput) {
-        let storedQty = localStorage.getItem('qtySampleSet');
-        let qtySampleSetValue;
-
-        if (storedQty && !isNaN(parseInt(storedQty, 10)) && parseInt(storedQty, 10) > 0) {
-            qtySampleSetValue = parseInt(storedQty, 10);
-        } else {
-            qtySampleSetValue = '';
-        }
-
-        qtySampleSetInput.value = qtySampleSetValue;
-
-        qtySampleSetInput.addEventListener('change', () => {
-            let newQty = parseInt(qtySampleSetInput.value, 10);
-            if (!isNaN(newQty) && newQty > 0) {
-                localStorage.setItem('qtySampleSet', newQty);
-            } else {
-                localStorage.removeItem('qtySampleSet');
-            }
-            updateTotalQtyInspect();
-            saveToLocalStorage(); // Auto-save saat ada perubahan
-        });
-    }
 
     const statisticButton = document.querySelector('.statistic-button');
 
@@ -1337,7 +1237,7 @@ function updateNcvsOptions(selectedAuditor) {
         ncvsSelect.disabled = false;
     } else {
         ncvsSelect.disabled = true;
-        defaultOption.textContent = "Pilih Line (pilih Auditor dahulu)";
+        defaultOption.textContent = "Pilih Line (pilih Inspector dahulu)";
     }
     ncvsSelect.value = "";
 }
@@ -1349,7 +1249,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const announcements = [
         { 
             date: "06-03-2025", 
-            text: `E-QMS kini hadir dalam versi web sebagai upgrade dari sistem berbasis Google Spreadsheet, menawarkan kemudahan input bagi auditor, akurasi data yang lebih baik, serta mengurangi risiko human error maupun kendala teknis pada sistem lama. Implementasi E-QMS Web App merupakan bagian dari komitmen kami dalam digitalisasi proses mutu, sejalan dengan visi untuk menciptakan operasional yang agile, data-driven, dan berkelanjutan.
+            text: `E-QMS kini hadir dalam versi web sebagai upgrade dari sistem berbasis Google Spreadsheet, menawarkan kemudahan input bagi inspector, akurasi data yang lebih baik, serta mengurangi risiko human error maupun kendala teknis pada sistem lama. Implementasi E-QMS Web App merupakan bagian dari komitmen kami dalam digitalisasi proses mutu, sejalan dengan visi untuk menciptakan operasional yang agile, data-driven, dan berkelanjutan.
 
 Apabila terdapat kendala teknis, silakan hubungi nomor berikut: 088972745194.`
         },
@@ -1393,7 +1293,7 @@ Apabila terdapat kendala teknis, silakan hubungi nomor berikut: 088972745194.`
             text: `🛠️ FTT Sampling App Update v.2025.07 – Dashboard Enhancement & Maintenance
 
 📊 Statistical Dashboard Upgrade
-1. Menambahkan filter: Start/End Date, Auditor, NCVS, Model, Style Number
+1. Menambahkan filter: Start/End Date, Inspector, NCVS, Model, Style Number
 2. Mengimplementasikan bar, pie, dan line chart untuk FTT, defect, dan grade
 3. Menampilkan Avg. FTT, Rework Rate, dan A-Grade Ratio (%, 2 desimal)
 4. Menyesuaikan label, axis, dan format tanggal pada chart
@@ -1483,4 +1383,3 @@ Apabila terdapat kendala teknis, silakan hubungi nomor berikut: 088972745194.`
         }
     }
 });
-
