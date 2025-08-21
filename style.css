@@ -1335,3 +1335,18 @@ h1:hover {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.app {
+  width: 1920px;   /* ukuran asli desain */
+  height: 1080px;
+  transform-origin: top left;
+}
