@@ -1340,8 +1340,8 @@ h1:hover {
 html, body {
   margin: 0;
   padding: 0;
-  height: 75%;
-  width: 75%;
+  height: 80%;
+  width: 90%;
   overflow: hidden;
 }
 
@@ -1350,4 +1350,5 @@ html, body {
   height: 1080px;
   transform-origin: top left;
 }
+
 
