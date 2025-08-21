@@ -62,7 +62,10 @@
             </select>
 
 <label for="style-number">Style Number</label>
-<input type="text" id="style-number" placeholder="Style number diisi lengkap">
+<div class="combobox-container">
+    <input type="text" id="style-number" placeholder="Ketik atau pilih style number" autocomplete="off">
+    <div id="style-dropdown" class="dropdown-list"></div>
+</div>
 
 <label for="model-name">Model Name</label>
 <input type="text" id="model-name" placeholder="Enter model name" readonly>
