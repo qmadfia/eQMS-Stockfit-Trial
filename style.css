@@ -1349,8 +1349,9 @@ html, body {
 .app {
   width: 1920px;   /* ukuran asli desain */
   height: 1080px;
-  transform-origin: top left;
+  transform-origin: top center;
 }
+
 
 
 
