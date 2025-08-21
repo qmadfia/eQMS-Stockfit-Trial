@@ -8,22 +8,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+  <div class="app">
     <div class="header">
         <img src="logo.png" alt="Logo" class="logo">
         <h1>E-QMS STOCKFIT Trial</h1>
-<button id="announcement-button" class="announcement-button">
-    <i class="fas fa-bell announcement-icon"></i>
-</button>
-  <!-- Tombol Statistik -->
-<button class="statistic-button" title="Lihat Statistik Data">
-  <i class="statistic-icon">📊</i>
-</button>
+        <button id="announcement-button" class="announcement-button">
+            <i class="fas fa-bell announcement-icon"></i>
+        </button>
+        <button class="statistic-button" title="Lihat Statistik Data">
+            <i class="statistic-icon">📊</i>
+        </button>
     </div>
-    <div class="dashboard">
-        </div>
 
-   <div id="announcement-popup" class="announcement-popup">
-    <div class="announcement-content">
+    <div class="dashboard"></div>
+
+    <!-- Popup -->
+    <div id="announcement-popup" class="announcement-popup">
+      <div class="announcement-content">
         <span class="close-button">&times;</span>
         <div id="announcement-date" class="announcement-date">
             <button id="prev-announcement" class="announcement-nav">&lt;</button>
@@ -31,8 +32,8 @@
             <button id="next-announcement" class="announcement-nav">&gt;</button>
         </div>
         <div id="announcement-text" class="announcement-text"></div>
+      </div>
     </div>
-</div>
     <div class="dashboard">
         <!-- Form Section (Kiri Bawah) -->
         <div class="form-section">
@@ -187,10 +188,12 @@
 <button class="defect-button defect-red" data-defect="IP HOLE>2mm">IP HOLE>2mm</button>
             </div>
 </div>
-<div id="loading-overlay">
+    <div id="loading-overlay">
         <div class="spinner"></div>
     </div>
+  </div> <!-- end .app -->
 
-    <script src="script.js" type="module"></script>
+  <script src="script.js" type="module"></script>
+  <script src="scale.js"></script> <!-- JS untuk scaling -->
 </body>
 </html>
