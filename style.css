@@ -1347,10 +1347,11 @@ html, body {
 }
 
 .app {
-  width: 1920px;   /* ukuran asli desain */
-  height: 1080px;
+  width: 2237px;   /* ukuran asli desain */
+  height: 1150px;
   transform-origin: top left;
 }
+
 
 
 
