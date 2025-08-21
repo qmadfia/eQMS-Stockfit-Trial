@@ -1,15 +1,21 @@
 function scaleApp() {
   const app = document.querySelector('.app');
-  const scaleX = window.innerWidth / 1920;
-  const scaleY = window.innerHeight / 1080;
-  const scale = Math.min(scaleX, scaleY); // biar pas tanpa scroll
+  const parentWidth = window.innerWidth;
+  const parentHeight = window.innerHeight;
+
+  const appWidth = app.offsetWidth;
+  const appHeight = app.offsetHeight;
+
+  const scaleX = parentWidth / appWidth;
+  const scaleY = parentHeight / appHeight;
+
+  // gunakan yang lebih besar, biar selalu menutup layar penuh
+  const scale = Math.max(scaleX, scaleY);
+
   app.style.transform = `scale(${scale})`;
 
-  // Centering kalau layar lebih lebar/tinggi
+  // center
   app.style.position = "absolute";
-  app.style.left = `${(window.innerWidth - 1920 * scale) / 2}px`;
-  app.style.top = `${(window.innerHeight - 1080 * scale) / 2}px`;
+  app.style.left = `${(parentWidth - appWidth * scale) / 2}px`;
+  app.style.top = `${(parentHeight - appHeight * scale) / 2}px`;
 }
-
-window.addEventListener('resize', scaleApp);
-window.addEventListener('load', scaleApp);
