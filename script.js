@@ -767,7 +767,13 @@ function showConfirmationPopup(grade, onConfirmCallback) {
 async function saveData() {
     console.log("Memulai proses simpan data...");
 
-    // --- MODIFIKASI DIMULAI ---
+    // --- Tambahkan kode ini di sini ---
+    if (!validateInputs() || !validateDefects()) {
+        console.log("Validasi form gagal. Proses simpan dibatalkan.");
+        return; // Hentikan fungsi jika validasi gagal
+    }
+    // ------------------------------------
+
     // Dapatkan elemen overlay dari DOM
     const loadingOverlay = document.getElementById('loading-overlay');
     // --- MODIFIKASI SELESAI ---
