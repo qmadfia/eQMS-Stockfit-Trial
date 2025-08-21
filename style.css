@@ -1337,19 +1337,21 @@ h1:hover {
 }
 
 
+
 html, body {
   margin: 0;
   padding: 0;
-  height: 150%;
-  width: 150%;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 
 .app {
-  width: 1587px;   /* ukuran asli desain */
-  height: 756px;
+  width: 1920px;   /* ukuran asli desain */
+  height: 1080px;
   transform-origin: top left;
 }
+
 
 
 
