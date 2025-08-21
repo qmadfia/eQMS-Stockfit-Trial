@@ -1346,10 +1346,11 @@ html, body {
 }
 
 .app {
-  width: 1920px;   /* ukuran asli desain */
-  height: 1080px;
+  width: 1587px;   /* ukuran asli desain */
+  height: 756px;
   transform-origin: top left;
 }
+
 
 
 
