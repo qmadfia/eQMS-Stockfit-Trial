@@ -4,6 +4,7 @@
 // --- IMPOR DATABASE DARI FILE TERPISAH ---
 // Pastikan path './databasemodel.js' sudah benar sesuai lokasi file Anda.
 import { styleModelDatabase } from './databasemodel.js';
+const styleNumberOptions = Object.keys(styleModelDatabase);
 let totalInspected = 0;
 // Variabel lama ini masih berguna untuk tampilan UI, tapi tidak untuk kalkulasi final
 let totalReworkLeft = 0;
@@ -1025,7 +1026,148 @@ function autoFillModelName() {
     }
 }
 
+// ===========================================
+// FUNGSI BARU: Setup Style Number ComboBox
+// ===========================================
 
+let currentHighlightIndex = -1;
+let filteredOptions = [];
+
+function setupStyleNumberComboBox() {
+    const dropdown = document.getElementById('style-dropdown');
+    if (!dropdown) return;
+
+    // Event listeners untuk keyboard navigation
+    styleNumberInput.addEventListener('keydown', handleComboBoxKeyDown);
+    styleNumberInput.addEventListener('focus', () => {
+        filterDropdownOptions(styleNumberInput.value);
+    });
+    
+    // Hide dropdown ketika click di luar
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.combobox-container')) {
+            hideDropdown();
+        }
+    });
+}
+
+function filterDropdownOptions(searchTerm) {
+    const dropdown = document.getElementById('style-dropdown');
+    if (!dropdown) return;
+
+    const term = searchTerm.toLowerCase().trim();
+    
+    if (term.length === 0) {
+        // Jika kosong, tampilkan semua opsi
+        filteredOptions = [...styleNumberOptions];
+    } else {
+        // Filter berdasarkan input
+        filteredOptions = styleNumberOptions.filter(option => 
+            option.toLowerCase().includes(term)
+        );
+    }
+
+    renderDropdownOptions();
+    showDropdown();
+    currentHighlightIndex = -1;
+}
+
+function renderDropdownOptions() {
+    const dropdown = document.getElementById('style-dropdown');
+    if (!dropdown) return;
+
+    dropdown.innerHTML = '';
+
+    if (filteredOptions.length === 0) {
+        const noResultItem = document.createElement('div');
+        noResultItem.className = 'dropdown-item';
+        noResultItem.textContent = 'Tidak ada hasil ditemukan';
+        noResultItem.style.fontStyle = 'italic';
+        noResultItem.style.color = '#999';
+        dropdown.appendChild(noResultItem);
+        return;
+    }
+
+    filteredOptions.forEach((option, index) => {
+        const item = document.createElement('div');
+        item.className = 'dropdown-item';
+        item.textContent = option;
+        item.addEventListener('click', () => selectOption(option));
+        dropdown.appendChild(item);
+    });
+}
+
+function selectOption(selectedOption) {
+    styleNumberInput.value = selectedOption;
+    hideDropdown();
+    autoFillModelName(); // Trigger auto-fill model name
+    saveToLocalStorage();
+    styleNumberInput.focus();
+}
+
+function showDropdown() {
+    const dropdown = document.getElementById('style-dropdown');
+    if (dropdown && filteredOptions.length > 0) {
+        dropdown.style.display = 'block';
+    }
+}
+
+function hideDropdown() {
+    const dropdown = document.getElementById('style-dropdown');
+    if (dropdown) {
+        dropdown.style.display = 'none';
+    }
+    currentHighlightIndex = -1;
+}
+
+function handleComboBoxKeyDown(e) {
+    const dropdown = document.getElementById('style-dropdown');
+    if (!dropdown || dropdown.style.display === 'none') return;
+
+    const items = dropdown.querySelectorAll('.dropdown-item');
+    
+    switch(e.key) {
+        case 'ArrowDown':
+            e.preventDefault();
+            currentHighlightIndex = Math.min(currentHighlightIndex + 1, items.length - 1);
+            updateHighlight(items);
+            break;
+            
+        case 'ArrowUp':
+            e.preventDefault();
+            currentHighlightIndex = Math.max(currentHighlightIndex - 1, -1);
+            updateHighlight(items);
+            break;
+            
+        case 'Enter':
+            e.preventDefault();
+            if (currentHighlightIndex >= 0 && items[currentHighlightIndex]) {
+                const selectedText = items[currentHighlightIndex].textContent;
+                if (selectedText !== 'Tidak ada hasil ditemukan') {
+                    selectOption(selectedText);
+                }
+            }
+            break;
+            
+        case 'Escape':
+            hideDropdown();
+            break;
+    }
+}
+
+function updateHighlight(items) {
+    items.forEach((item, index) => {
+        item.classList.toggle('highlighted', index === currentHighlightIndex);
+    });
+    
+    // Scroll ke item yang di-highlight jika perlu
+    if (currentHighlightIndex >= 0 && items[currentHighlightIndex]) {
+        items[currentHighlightIndex].scrollIntoView({
+            block: 'nearest',
+            behavior: 'smooth'
+        });
+    }
+}
 
 // ===========================================
 // 16. Inisialisasi Aplikasi dan Event Listeners (Dilengkapi dengan loadFromLocalStorage)
@@ -1081,13 +1223,18 @@ function initApp() {
         modelNameInput.addEventListener('input', saveToLocalStorage);
     }
     
-    if (styleNumberInput) {
-        // Saat auditor mengetik di Style Number, panggil fungsi autoFillModelName
-        styleNumberInput.addEventListener('input', () => {
-            saveToLocalStorage(); // Auto-save perubahan input
-            autoFillModelName(); // Panggil fungsi auto-fill
-        });
-    }
+if (styleNumberInput) {
+    // Setup ComboBox functionality
+    setupStyleNumberComboBox();
+    
+    // Event listener yang sudah ada (modifikasi)
+    styleNumberInput.addEventListener('input', (e) => {
+        saveToLocalStorage();
+        autoFillModelName();
+        filterDropdownOptions(e.target.value); // Tambahan untuk filtering
+    });
+}
+    
 
     // Setup Event Listeners untuk tombol (defect, rework, grade)
     defectButtons.forEach(button => {
