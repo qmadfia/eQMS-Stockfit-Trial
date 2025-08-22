@@ -194,6 +194,11 @@
   </div> <!-- end .app -->
 
   <script src="script.js" type="module"></script>
-  <script src="scale.js"></script> <!-- JS untuk scaling -->
+<script>
+// Pastikan scaling dipanggil setelah DOM loaded
+document.addEventListener('DOMContentLoaded', function() {
+    scaleApp();
+});
+</script>
 </body>
 </html>
