@@ -65,7 +65,7 @@ h1:hover {
     gap: 10px; /* Jaga jarak 10px antar grid items */
     padding: 10px; /* Mengurangi padding dashboard jika terlalu lebar */
     box-sizing: border-box;
-grid-template-rows: 0.6325fr 1.0325fr 0.5125fr 0.5525fr;
+grid-template-rows: 0.6325fr 1.0225fr 0.5125fr 0.5525fr;
     grid-template-columns: 1fr 3fr;
 
 }
@@ -1351,6 +1351,7 @@ h3 {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
 
 
 
