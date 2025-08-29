@@ -753,7 +753,7 @@ h3 {
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     padding: 25px;
-    height: 228px;
+    height: 324px;
     overflow-y: auto;
     overflow-x: hidden;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
@@ -1351,3 +1351,4 @@ h3 {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
