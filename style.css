@@ -1,3 +1,4 @@
+
 /* ============================= */
 /* 1. Global Styles              */
 /* ============================= */
@@ -42,7 +43,7 @@ body {
 
 h1 {
     font-family: 'Poppins', sans-serif; /* Font modern dan elegan */
-    font-size: 2.5em; /* Membesarkan ukuran teks */
+    font-size: 1em; /* Membesarkan ukuran teks */
     color: #ffffff;
     margin: 0;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Memberikan efek bayangan pada teks */
@@ -61,21 +62,23 @@ h1:hover {
 .dashboard {
     display: grid;
     gap: 10px; /* Jaga jarak 10px antar grid items */
-    padding: 1px; /* Mengurangi padding dashboard jika terlalu lebar */
+    padding: 10px; /* Mengurangi padding dashboard jika terlalu lebar */
     box-sizing: border-box;
-    grid-template-columns: 1fr 1.8fr;
+    grid-template-rows: 0.1fr 0.5fr 0.02fr 0.05fr;
+    grid-template-columns: 1fr 3fr;
 
 }
+
 /* ============================= */
 /* 4. Form Section             */
 /* ============================= */
 .form-section {
     grid-column: 1 / 2;
-    grid-row: 1 / 4;
+    grid-row: 1 / 3;
     background: linear-gradient(145deg, #ffffff, #f1f1f1);
     border-radius: 12px;
     box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
-    padding: 24px;
+    padding: 15px;
     overflow-y: auto;
     position: relative;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -88,20 +91,32 @@ h1:hover {
 
 .form-section label {
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-top: 1px;
     color: #444;
-    font-size: 20px;
+    font-size: 13px;
+    margin-bottom: 1px;
     display: block;
 }
 
-.form-section select,
-.form-section input {
+.form-section select {
     width: calc(100% - 10px);
-    padding: 12px;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 6px;
-    margin-bottom: 20px;
-    font-size: 15px;
+    margin-bottom: 5px;
+    font-size: 10px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.form-section input {
+    width: calc(100% - 10px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 5px;
+    font-size: 10px;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -133,24 +148,27 @@ h1:hover {
 
 .button-wrapper {
     display: flex;
-    justify-content: flex-end;
-    margin-top: 24px;
+    justify-content: center;
+    margin-top: 10px;
 }
 
 .save-button {
     background: linear-gradient(145deg, #4CAF50, #43a047);
     color: white;
-    width: calc(100% - 10px);
-    padding: 25px 50px;
+    /* Hapus 'width' agar padding bisa mengatur lebar */
+    padding: 10px 20px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 24px;
+    font-size: 12px;
     font-weight: bold;
+    margin-top: 0;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     transition: background 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    /* Tambahkan ini untuk memastikan teks di tengah */
+    text-align: center;
 }
 
 .save-button:hover {
@@ -170,15 +188,15 @@ h1:hover {
 /* Responsive Save Button */
 @media screen and (max-width: 1200px) {
     .save-button {
-        padding: 20px 40px;
-        font-size: 20px;
+        padding: 10px 20px;
+        font-size: 12px;
     }
 }
 
 @media screen and (max-width: 992px) {
     .save-button {
-        padding: 15px 30px;
-        font-size: 18px;
+        padding: 10px 20px;
+        font-size: 12px;
     }
 }
 
@@ -242,6 +260,8 @@ h1:hover {
 /* ============================= */
 .ftt-container {
     display: grid;
+        grid-column: 2 / 2;
+    grid-row: 1 / 1;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 20px;
     margin-bottom: 1px;
@@ -282,16 +302,10 @@ h1:hover {
     }
 }
 
-/* Hover Efek */
-.section:hover {
-    transform: translateY(-5px);
-    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.15), -6px -6px 15px rgba(255, 255, 255, 0.7);
-}
-
 
 /* Label FTT & Qty Inspect */
 .section label {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     color: #555;
     margin-bottom: 8px;
@@ -303,13 +317,13 @@ h1:hover {
 
 /* Output Box (FTT & Qty Inspect) */
 .counter {
-    font-size: 28px;
+    font-size: 20px;
     font-weight: bold;
     text-align: center;
     padding: 12px;
     border-radius: 8px;
     width: 120px;
-    margin-top: 6px;
+    margin-top: 1px;
     background: linear-gradient(145deg, #e8f5e9, #ffffff);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -362,11 +376,11 @@ h1:hover {
 /* ============================= */
 .qty-section {
     display: grid;
-         grid-column: 2 / 3;
-    grid-row: 4 / 5;
-        min-height: 110px;
-  max-height: 110px;
-        margin-top: 193px;
+    grid-column: 2 / 3;
+    grid-row: 4 / 4;
+    min-height: 40px;
+    max-height: 40px;
+    margin-top: 90px;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 15px;
     grid-auto-flow: row;
@@ -377,6 +391,7 @@ h1:hover {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
+
 /* Efek hover pada qty-section */
 .qty-section:hover {
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
@@ -386,14 +401,14 @@ h1:hover {
 /* Jika layar kecil (HP mode portrait), batasi jadi 2 kolom */
 @media (max-width: 600px) {
     .qty-section {
-        grid-template-columns: repeat(2, 1fr); /* 2 item per baris */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 /* Jika layar sangat kecil (<400px), buat 1 item per baris */
 @media (max-width: 400px) {
     .qty-section {
-        grid-template-columns: repeat(1, 1fr); /* 1 item per baris */
+        grid-template-columns: repeat(1, 1fr);
     }
 }
 
@@ -402,21 +417,18 @@ h1:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
-    padding: 15px;
+    border-radius: 1px;
+    padding: 1px;
+    margin-top: -20px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Efek hover qty-item */
-.qty-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.15), -6px -6px 15px rgba(255, 255, 255, 0.7);
-}
 
 .input-button {
-    font-size: 16px;
+    font-size: 10px;
     font-weight: bold;
     padding: 12px 20px;
+    margin-bottom: 5px; /* Add space below the button */
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -426,6 +438,7 @@ h1:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     color: white;
     width: 140px;
+    margin-top
     text-align: center;
 }
 
@@ -458,14 +471,14 @@ h1:hover {
 }
 
 .output-box {
-    font-size: 22px;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
     padding: 12px 20px;
     border-radius: 10px;
     width: 90px;
-    margin-top: 12px;
-    background: linear-gradient(145deg, #ffffff, #e6e9ef);
+    margin-top: 0; /* Add space above the output box */
+    background: linear-gradient(145deg, #F5F5F5, #e6e9ef);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -479,9 +492,9 @@ h1:hover {
 /* ============================= */
 .rework-section {
      grid-column: 2 / 3;
-    grid-row: 4 / 5;
-    min-height: 110px;
-  max-height: 180px;
+    grid-row: 4 / 4;
+    min-height: 40px;
+  max-height: 78px;
     display: flex;
     gap: 20px;
     justify-content: space-between;
@@ -511,15 +524,10 @@ h1:hover {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.rework-left:hover, .rework-right:hover {
-    transform: translateY(-5px);
-    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.15), -6px -6px 15px rgba(255, 255, 255, 0.7);
-}
-
 .rework-left p, .rework-right p {
-    font-size: 1.8rem;
+    font-size: 1rem;
     font-weight: bold;
-    margin: 10px 0;
+    margin: 1px 0;
     color: #333;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -527,7 +535,7 @@ h1:hover {
 .rework-left button, .rework-right button {
     background: linear-gradient(135deg, #4CAF50, #45a049);
     color: white;
-    font-size: 16px;
+    font-size: 9px;
     padding: 12px 20px;
     border: none;
     border-radius: 8px;
@@ -559,15 +567,11 @@ h1:hover {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.rework-pairs:hover {
-    transform: translateY(-5px);
-    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.15), -6px -6px 15px rgba(255, 255, 255, 0.7);
-}
 
 .rework-pairs p {
-    font-size: 1.8rem;
+    font-size: 1rem;
     font-weight: bold;
-    margin: 10px 0;
+    margin: 1px 0;
     color: #333;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -575,7 +579,7 @@ h1:hover {
 .rework-pairs button {
     background: linear-gradient(135deg, #4CAF50, #45a049);
     color: white;
-    font-size: 16px;
+    font-size: 9px;
     padding: 12px 20px;
     border: none;
     border-radius: 8px;
@@ -595,6 +599,14 @@ h1:hover {
     transform: scale(0.95);
 }
 
+h3 {
+  font-size: 0.7rem; /* Mengatur ukuran teks menjadi 1.2 kali ukuran font dasar */
+  font-weight: bold; /* Menjadikan teks tebal */
+  color: #333; /* Mengatur warna teks */
+  margin: 10px 0 5px; /* Mengatur margin atas, bawah, dan samping */
+}
+
+
 /* ============================= */
 /* 8. Defect Menu Section        */
 /* ============================= */
@@ -605,9 +617,9 @@ h1:hover {
     background: linear-gradient(145deg, #ffffff, #f3f3f3);
     border-radius: 15px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    padding: 16px 20px 20px 20px;
+    padding: 16px 20px 20px 16px;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
-    font-size: 20px;
+    font-size: 14px;
     text-align: center;
     min-height: 200px;
     overflow: auto;
@@ -615,11 +627,11 @@ h1:hover {
 
 .defect-menu h3 {
     margin: 0 0 15px 0;
-    font-size: 18px;
+    font-size: 12px;
     font-weight: bold;
     color: #333;
     text-transform: uppercase;
-    padding-bottom: 5px;
+    padding-bottom: 0;
 }
 
 .defect-menu:hover {
@@ -640,15 +652,16 @@ h1:hover {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-align: center;
+    margin-left: -11px;
     transition: all 0.3s ease; /* Transisi untuk semua properti */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    min-width: 145px;
-    min-height: 50px;
+    min-width: 155px;
+    min-height: 40px;
     overflow: hidden;
     white-space: normal;
     word-wrap: break-word;
@@ -733,12 +746,13 @@ h1:hover {
 .summary-defect {
     /* Style yang sudah ada */
     grid-column: 1 / 2;
+    grid-row: 3 / 5;
     margin-top: 0;
     background: linear-gradient(145deg, #ffffff, #f7f7f7);
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     padding: 25px;
-    height: 313px;
+    height: 228px;
     overflow-y: auto;
     overflow-x: hidden;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
@@ -748,8 +762,8 @@ h1:hover {
 
 .summary-defect h3 {
     /* Style yang sudah ada */
-    margin: 0 0 15px 0;
-    font-size: 18px;
+    margin-top: -17px;
+    font-size: 13px;
     font-weight: bold;
     color: #333;
     text-transform: uppercase;
@@ -758,6 +772,7 @@ h1:hover {
 }
 .summary-item {
     background-color: #ffffff;
+    font-size: 12px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     padding: 10px 15px;
@@ -801,7 +816,7 @@ h1:hover {
     min-width: 30px;
     text-align: center;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     border: 2px solid #ff4c4c;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -985,7 +1000,7 @@ h1:hover {
     border: none;
     cursor: pointer;
     position: absolute;
-    top: 25px;
+    top: 10px;
     right: 30px;
     padding: 0;
     transition: color 0.3s ease, transform 0.2s ease;
@@ -994,7 +1009,7 @@ h1:hover {
     transform: scale(1.1);
 }
 .announcement-icon {
-    font-size: 30px;
+    font-size: 18px;
     color: #FF9800;
     transition: transform 0.2s ease;
 }
@@ -1155,14 +1170,14 @@ h1:hover {
     border: none;
     cursor: pointer;
     position: absolute;
-    top: 17px;
-    right: 80px; /* Geser kiri dari tombol announcement */
+    top: 7px;
+    right: 57px; /* Geser kiri dari tombol announcement */
     padding: 0;
     transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .statistic-icon {
-    font-size: 30px;
+    font-size: 18px;
     color: #3f51b5; /* Warna biru keunguan */
     transition: transform 0.2s ease, color 0.2s ease;
 }
@@ -1335,4 +1350,3 @@ h1:hover {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
