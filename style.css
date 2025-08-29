@@ -65,7 +65,7 @@ h1:hover {
     gap: 10px; /* Jaga jarak 10px antar grid items */
     padding: 10px; /* Mengurangi padding dashboard jika terlalu lebar */
     box-sizing: border-box;
-grid-template-rows: 0.6325fr 1.0125fr 0.5125fr 0.5525fr;
+grid-template-rows: 0.4925fr 0.9925fr 0.5125fr 0.5525fr;
     grid-template-columns: 1fr 3fr;
 
 }
@@ -104,8 +104,8 @@ grid-template-rows: 0.6325fr 1.0125fr 0.5125fr 0.5525fr;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 6px;
-    margin-bottom: 5px;
-    font-size: 10px;
+    margin-bottom: 6px;
+    font-size: 13px;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -116,8 +116,8 @@ grid-template-rows: 0.6325fr 1.0125fr 0.5125fr 0.5525fr;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 6px;
-    margin-bottom: 5px;
-    font-size: 10px;
+    margin-bottom: 6px;
+    font-size: 13px;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -150,7 +150,7 @@ grid-template-rows: 0.6325fr 1.0125fr 0.5125fr 0.5525fr;
 .button-wrapper {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 6px;
 }
 
 .save-button {
@@ -628,7 +628,7 @@ h3 {
 
 .defect-menu h3 {
     margin: 0 0 15px 0;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     color: #333;
     text-transform: uppercase;
@@ -642,8 +642,8 @@ h3 {
 
 .defect-items {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 15px 33px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1.2fr));
+    gap: 15px 40px;
 }
 
 .defect-button {
@@ -653,7 +653,7 @@ h3 {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 15px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -661,7 +661,7 @@ h3 {
     margin-left: -11px;
     transition: all 0.3s ease; /* Transisi untuk semua properti */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    min-width: 155px;
+    min-width: 215px;
     min-height: 40px;
     overflow: hidden;
     white-space: normal;
